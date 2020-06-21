@@ -1,9 +1,13 @@
+/*
+   USO DA TECNOLOGIA RFID NA IDENTIFICAÇÃO, ARMAZENAMENTO, 
+             CONTROLE E MOVIMENTAÇÃO DE URNAS ELETRÔNICAS.             
+*/
+
 // --- Bibliotecas ---
 #include <LiquidCrystal.h>   
 #include <SoftwareSerial.h>
 
-SoftwareSerial RFID(2, 3); // RX e TX
-              
+SoftwareSerial RFID(2, 3); // RX e TX              
 LiquidCrystal lcd(5, 6, 7, 8, 9, 10, 11);  //RS R/W ENABLE D4 D5 D6 D7
 //PIN PLACA  4,5,6 - 11,12,13,14// RS RW E D4 D5 D6 D7
 
@@ -62,7 +66,6 @@ void loop()
 {
   lerTags();
 }
-
 
 //---------- PROCEDIMENTOS E FUNÇÕES ----------- //  
 
@@ -158,13 +161,13 @@ void lerTags()
     
   }
 
-  if (ok > 0) // Quanto é encontrado...
+  /*if (ok > 0) // Quanto é encontrado...
   {
     digitalWrite(LED, HIGH);
     delay(1000);
     digitalWrite(LED, LOW);    
   }
-  else if (ok == 0) // Não encontrado...
+  else*/ if (ok == 0) // Não encontrado...
   {
     ok = -1;
   }  
@@ -197,8 +200,7 @@ void imprimeLCD(int numeroUrna)
     lcd.print(urna);
     lcd.setCursor(9, 0);
     lcd.print("ZON:"); 
-    lcd.s
-ursor(13, 0);
+    lcd.setCursor(13, 0);
     lcd.print(zona); 
     
     lcd.setCursor(0, 1);
@@ -208,8 +210,10 @@ ursor(13, 0);
     lcd.setCursor(9, 1);
     lcd.print("PLT:");
     lcd.print(palete);
-
-    delay(10000);
+    
+    digitalWrite(LED, HIGH);
+    delay(8000);
+    digitalWrite(LED, LOW);   
     count++;
     lcd.clear();            //Limpa LCD
 }
